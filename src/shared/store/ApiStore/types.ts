@@ -20,6 +20,8 @@ export type RequestParams<ReqT> = {
 
 // Перечисление статусов ответа
 export enum StatusHTTP {
+  OK = "200 OK",
+  NOT_FOUND = "404 Not Found",
   ERROR = "ERROR",
 }
 
