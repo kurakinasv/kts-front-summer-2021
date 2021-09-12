@@ -1,4 +1,4 @@
-import "./Input.css";
+import styles from "@styles/style.module.scss";
 
 export type InputProps = {
   value: string;
@@ -17,7 +17,7 @@ const Input: React.FC<InputProps> = ({
 }) => (
   <input
     value={value}
-    className={"search__input"}
+    className={styles.search__input}
     placeholder={placeholder}
     onChange={onChange}
     disabled={isDisabled}

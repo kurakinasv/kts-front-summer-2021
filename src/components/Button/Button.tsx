@@ -1,16 +1,16 @@
 import React from "react";
 
-import SearchIcon from "@components/SearchIcon";
-import "./Button.css";
+import "./Button.scss";
 
 export type ButtonProps = {
   onClick: (e: React.MouseEvent) => void;
-  isDisabled?: boolean;
+  disabled?: boolean;
+  children: {};
 };
 
-const Button: React.FC<ButtonProps> = ({ onClick, isDisabled }) => (
-  <button onClick={onClick} disabled={isDisabled}>
-    <SearchIcon />
+const Button: React.FC<ButtonProps> = ({ onClick, disabled, children }) => (
+  <button onClick={onClick} disabled={disabled}>
+    {children}
   </button>
 );
 

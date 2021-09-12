@@ -1,5 +1,6 @@
 import React from "react";
-import "./Avatar.css";
+
+import styles from "../RepoTile/RepoTile.module.scss";
 
 type AvatarProps = {
   src?: string;
@@ -7,7 +8,7 @@ type AvatarProps = {
 };
 
 const Avatar: React.FC<AvatarProps> = ({ src, alt }) => (
-  <div className={"git-repo-tile__avatar"}>
+  <div className={styles.repotile__avatar}>
     {src && <img src={src} alt={alt} />}
     {!src && alt}
   </div>
