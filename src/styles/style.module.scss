@@ -1,0 +1,69 @@
+@import "../variables.scss";
+
+body {
+  margin: 20px 20px;
+  width: 357px;
+  font-family: "Roboto", sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 16px;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+.component {
+  display: grid;
+  align-items: center;
+
+  grid-template-rows: 50px 1352px;
+  grid-row-gap: 20px;
+}
+
+.search {
+  margin: 20px auto;
+
+  display: grid;
+  grid-template-columns: 295px 50px;
+  grid-column-gap: 12px;
+
+  align-items: center;
+
+  &__input {
+    padding: 15.5px 2px 15.5px 12px;
+    line-height: 16px;
+
+    background-color: $white-color;
+    border: $border;
+    border-radius: $border-radius;
+  }
+}
+
+.search__input:focus {
+  outline: none;
+  border: 1.5px solid $red-color;
+}
+
+.search__input:disabled {
+  color: $gray-color;
+  background-color: $input-bg-disabled;
+  border: $border;
+}
+
+.search__input::placeholder {
+  align-items: center;
+
+  color: $gray-color;
+}
+
+.search__input:focus::placeholder {
+  opacity: 0;
+}
+
+.search__input:disabled::placeholder {
+  visibility: hidden;
+}

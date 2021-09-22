@@ -1,25 +1,44 @@
 /* eslint-disable no-console */
-import React from "react";
+import React, { createContext, useContext } from "react";
 
 import Button from "@components/Button";
 import Input from "@components/Input";
-import RepoTile from "@components/RepoTile";
+import SearchIcon from "@components/SearchIcon";
+import styles from "@styles/style.module.scss";
+import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
+import ReposListPage from "src/ReposListPage";
 import GitHubStore from "src/store/GitHubStore";
 import { RepoItem } from "src/store/GitHubStore/types";
+import UserRepoPage from "src/UserRepoPage";
+
+type ReposContext = { list: RepoItem[]; isLoading: boolean; load: () => void };
+
+const someContext = createContext<ReposContext>({
+  list: [],
+  isLoading: false,
+  load: () => {},
+});
+
+const Provider = someContext.Provider;
+export const useSomeContext = () => useContext(someContext);
 
 const ReposSearchPage = () => {
-  const [value, showSym] = React.useState("");
+  const [value, onChange] = React.useState("");
   const [isLoading, setIsLoading] = React.useState(false);
   const [repoList, setRepoList] = React.useState<RepoItem[]>([]);
 
   const setIsLoadingTrue = () => setIsLoading(true);
   const setIsLoadingFalse = () => setIsLoading(false);
 
+  const handleSearch = () => {
+    setIsLoading((isLoading) => (isLoading ? false : true));
+  };
+
   function handleChange(e: any) {
-    showSym(`${e.target.value}`);
+    onChange(e.target.value);
   }
 
-  React.useEffect(() => {
+  const loadRepos = () => {
     setIsLoadingTrue();
     const gitHubStore = new GitHubStore();
 
@@ -32,17 +51,23 @@ const ReposSearchPage = () => {
         setRepoList(response);
         setIsLoadingFalse();
       });
-  }, [setRepoList]);
+  };
+
+  const contextObj: ReposContext = {
+    list: repoList,
+    isLoading: isLoading,
+    load: loadRepos,
+  };
 
   return (
-    <>
-      <div className="body">
-        <div className={"search"}>
+    <BrowserRouter>
+      <div className={styles.body}>
+        <div className={styles.search}>
           {!isLoading && (
             <Input
               value={value}
               placeholder={"Введите название организации"}
-              className={""}
+              // className={""}
               onChange={handleChange}
             />
           )}
@@ -52,28 +77,32 @@ const ReposSearchPage = () => {
               value={value}
               placeholder={"Введите название организации"}
               onChange={handleChange}
-              className={""}
               isDisabled={true}
             />
           )}
 
-          {!isLoading && <Button onClick={setIsLoadingTrue} />}
+          {!isLoading && (
+            <Button disabled={isLoading} onClick={handleSearch}>
+              <SearchIcon />
+            </Button>
+          )}
 
           {isLoading && (
-            <Button isDisabled={true} onClick={setIsLoadingFalse} />
+            <Button disabled={isLoading} onClick={handleSearch}>
+              <SearchIcon />
+            </Button>
           )}
         </div>
 
-        {repoList.length &&
-          repoList.map((repo, index) => {
-            return (
-              <div key={repo.id} className={"git-repo-tile"}>
-                <RepoTile onClick={setIsLoadingFalse} item={repoList[index]} />
-              </div>
-            );
-          })}
+        <Switch>
+          <Route exact path="/repos/:id" component={UserRepoPage} />
+          <Provider value={contextObj}>
+            <Route exact path="/repos" component={ReposListPage} />
+            <Redirect to="/repos" />
+          </Provider>
+        </Switch>
       </div>
-    </>
+    </BrowserRouter>
   );
 };
 

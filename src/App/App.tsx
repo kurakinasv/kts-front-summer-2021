@@ -1,11 +1,7 @@
 import ReposSearchPage from "src/ReposSearchPage";
 
 const App = () => {
-  return (
-    <div>
-      <ReposSearchPage />
-    </div>
-  );
+  return <ReposSearchPage />;
 };
 
 export default App;
