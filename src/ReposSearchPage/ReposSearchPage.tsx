@@ -30,6 +30,10 @@ const ReposSearchPage = () => {
   const setIsLoadingTrue = () => setIsLoading(true);
   const setIsLoadingFalse = () => setIsLoading(false);
 
+  const handleSearch = () => {
+    setIsLoading((isLoading) => (isLoading ? false : true));
+  };
+
   function handleChange(e: any) {
     onChange(e.target.value);
   }
@@ -56,52 +60,49 @@ const ReposSearchPage = () => {
   };
 
   return (
-    <>
-      <BrowserRouter>
-        <div className={styles.body}>
-          <div className={styles.search}>
-            {!isLoading && (
-              <Input
-                value={value}
-                placeholder={"Введите название организации"}
-                className={""}
-                onChange={handleChange}
-              />
-            )}
+    <BrowserRouter>
+      <div className={styles.body}>
+        <div className={styles.search}>
+          {!isLoading && (
+            <Input
+              value={value}
+              placeholder={"Введите название организации"}
+              // className={""}
+              onChange={handleChange}
+            />
+          )}
 
-            {isLoading && (
-              <Input
-                value={value}
-                placeholder={"Введите название организации"}
-                onChange={handleChange}
-                className={""}
-                isDisabled={true}
-              />
-            )}
+          {isLoading && (
+            <Input
+              value={value}
+              placeholder={"Введите название организации"}
+              onChange={handleChange}
+              isDisabled={true}
+            />
+          )}
 
-            {!isLoading && (
-              <Button onClick={setIsLoadingTrue}>
-                <SearchIcon />
-              </Button>
-            )}
+          {!isLoading && (
+            <Button disabled={isLoading} onClick={handleSearch}>
+              <SearchIcon />
+            </Button>
+          )}
 
-            {isLoading && (
-              <Button disabled={true} onClick={setIsLoadingFalse}>
-                <SearchIcon />
-              </Button>
-            )}
-          </div>
-
-          <Switch>
-            <Route exact path="/repos/:id" component={UserRepoPage} />
-            <Provider value={contextObj}>
-              <Route exact path="/repos" component={ReposListPage} />
-              <Redirect to="/repos" />
-            </Provider>
-          </Switch>
+          {isLoading && (
+            <Button disabled={isLoading} onClick={handleSearch}>
+              <SearchIcon />
+            </Button>
+          )}
         </div>
-      </BrowserRouter>
-    </>
+
+        <Switch>
+          <Route exact path="/repos/:id" component={UserRepoPage} />
+          <Provider value={contextObj}>
+            <Route exact path="/repos" component={ReposListPage} />
+            <Redirect to="/repos" />
+          </Provider>
+        </Switch>
+      </div>
+    </BrowserRouter>
   );
 };
 

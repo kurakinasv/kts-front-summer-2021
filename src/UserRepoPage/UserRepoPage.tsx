@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 import RepoTile from "@components/RepoTile";
-import styles from "@components/RepoTile/RepoTile.module.scss";
+// import styles from "@components/RepoTile/RepoTile.module.scss";
 import axios from "axios";
 import { Link, useParams } from "react-router-dom";
 import { RepoItem } from "src/store/GitHubStore/types";
@@ -27,9 +27,7 @@ const UserRepoPage = () => {
   return (
     <div>
       {repo ? (
-        <div className={styles.repotile}>
-          <RepoTile item={repo} onClick={() => {}} />
-        </div>
+        <RepoTile item={repo} onClick={() => {}} />
       ) : (
         <div>
           <div>Такого репозитория нет :c</div>

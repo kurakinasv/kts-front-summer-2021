@@ -16,7 +16,7 @@ const ReposListPage = () => {
     <div>
       <div className={styles.list}>
         {context.list.map((repo, index) => (
-          <div key={repo.id} className={`${styles.repotile}`}>
+          <div key={repo.id}>
             <Link to={`/repos/${repo.id}`}>
               <RepoTile onClick={() => {}} item={context.list[index]} />
             </Link>
