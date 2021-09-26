@@ -1,78 +1,51 @@
-/* eslint-disable no-console */
-import React, { createContext, useContext } from "react";
+import React from "react";
 
 import Button from "@components/Button";
 import Input from "@components/Input";
+import ReposContext from "@components/ReposContext/ReposContext";
 import SearchIcon from "@components/SearchIcon";
 import styles from "@styles/style.module.scss";
+import { Meta } from "@utils/meta";
+import { useLocalStore } from "@utils/useLocalStore";
+import { observer } from "mobx-react-lite";
 import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 import ReposListPage from "src/ReposListPage";
-import GitHubStore from "src/store/GitHubStore";
-import { RepoItem } from "src/store/GitHubStore/types";
+import ReposListStore from "src/ReposListPage/ReposListStore";
 import UserRepoPage from "src/UserRepoPage";
 
-type ReposContext = { list: RepoItem[]; isLoading: boolean; load: () => void };
+const ReposSearchPage: React.FC = () => {
+  const reposListStore = useLocalStore(() => new ReposListStore());
 
-const someContext = createContext<ReposContext>({
-  list: [],
-  isLoading: false,
-  load: () => {},
-});
-
-const Provider = someContext.Provider;
-export const useSomeContext = () => useContext(someContext);
-
-const ReposSearchPage = () => {
   const [value, onChange] = React.useState("");
-  const [isLoading, setIsLoading] = React.useState(false);
-  const [repoList, setRepoList] = React.useState<RepoItem[]>([]);
-
-  const setIsLoadingTrue = () => setIsLoading(true);
-  const setIsLoadingFalse = () => setIsLoading(false);
 
   const handleSearch = () => {
-    setIsLoading((isLoading) => (isLoading ? false : true));
+    reposListStore.getOrganizationReposList({
+      orgName: "ktsstudio",
+    });
   };
 
-  function handleChange(e: any) {
-    onChange(e.target.value);
-  }
+  const handleChange = React.useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => onChange(e.target.value),
+    []
+  );
 
-  const loadRepos = () => {
-    setIsLoadingTrue();
-    const gitHubStore = new GitHubStore();
-
-    gitHubStore
-      .getOrganizationReposList({ orgName: "ktsstudio" })
-      .then((response) => {
-        return response.success ? response.data : [];
-      })
-      .then((response) => {
-        setRepoList(response);
-        setIsLoadingFalse();
-      });
-  };
-
-  const contextObj: ReposContext = {
-    list: repoList,
-    isLoading: isLoading,
-    load: loadRepos,
-  };
+  React.useEffect(() => {
+    reposListStore.getOrganizationReposList({ orgName: "ktsstudio" });
+  }, [reposListStore]);
 
   return (
     <BrowserRouter>
       <div className={styles.body}>
         <div className={styles.search}>
-          {!isLoading && (
+          {reposListStore.meta !== Meta.loading && (
             <Input
               value={value}
               placeholder={"Введите название организации"}
-              // className={""}
               onChange={handleChange}
             />
           )}
 
-          {isLoading && (
+          {reposListStore.meta === Meta.loading && (
             <Input
               value={value}
               placeholder={"Введите название организации"}
@@ -81,14 +54,14 @@ const ReposSearchPage = () => {
             />
           )}
 
-          {!isLoading && (
-            <Button disabled={isLoading} onClick={handleSearch}>
+          {reposListStore.meta !== Meta.loading && (
+            <Button disabled={false} onClick={handleSearch}>
               <SearchIcon />
             </Button>
           )}
 
-          {isLoading && (
-            <Button disabled={isLoading} onClick={handleSearch}>
+          {reposListStore.meta === Meta.loading && (
+            <Button disabled={true} onClick={handleSearch}>
               <SearchIcon />
             </Button>
           )}
@@ -96,14 +69,14 @@ const ReposSearchPage = () => {
 
         <Switch>
           <Route exact path="/repos/:id" component={UserRepoPage} />
-          <Provider value={contextObj}>
+          <ReposContext reposListStore={reposListStore}>
             <Route exact path="/repos" component={ReposListPage} />
             <Redirect to="/repos" />
-          </Provider>
+          </ReposContext>
         </Switch>
       </div>
     </BrowserRouter>
   );
 };
 
-export default ReposSearchPage;
+export default observer(ReposSearchPage);

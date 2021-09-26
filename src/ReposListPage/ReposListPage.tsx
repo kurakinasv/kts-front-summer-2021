@@ -1,24 +1,25 @@
 import React from "react";
 
+import { useReposListContext } from "@components/ReposContext/ReposContext";
 import RepoTile from "@components/RepoTile";
 import styles from "@components/RepoTile/RepoTile.module.scss";
 import { Link } from "react-router-dom";
-import { useSomeContext } from "src/ReposSearchPage/ReposSearchPage";
+import { RepoItemModel } from "src/store/models/gitHub";
 
-const ReposListPage = () => {
-  const context = useSomeContext();
+type ReposListPageProps = {
+  list: RepoItemModel[];
+};
 
-  React.useEffect(() => {
-    context.load();
-  }, []);
+const ReposListPage: React.FC<ReposListPageProps> = ({ list }) => {
+  const context = useReposListContext();
 
   return (
     <div>
       <div className={styles.list}>
-        {context.list.map((repo, index) => (
+        {context.reposListStore?.list.map((repo) => (
           <div key={repo.id}>
             <Link to={`/repos/${repo.id}`}>
-              <RepoTile onClick={() => {}} item={context.list[index]} />
+              <RepoTile onClick={() => {}} item={repo} />
             </Link>
           </div>
         ))}
@@ -27,4 +28,4 @@ const ReposListPage = () => {
   );
 };
 
-export default ReposListPage;
+export default React.memo(ReposListPage);

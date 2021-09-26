@@ -1,33 +1,26 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 import RepoTile from "@components/RepoTile";
-// import styles from "@components/RepoTile/RepoTile.module.scss";
-import axios from "axios";
+import { Meta } from "@utils/meta";
+import { useLocalStore } from "@utils/useLocalStore";
+import { observer } from "mobx-react-lite";
 import { Link, useParams } from "react-router-dom";
-import { RepoItem } from "src/store/GitHubStore/types";
+
+import RepoItemStore from "./RepoItemStore";
 
 const UserRepoPage = () => {
-  const [repo, setRepo] = useState<RepoItem>();
+  const repoItemStore = useLocalStore(() => new RepoItemStore());
 
   const { id } = useParams<{ id?: string }>();
-  const repoId = `https://api.github.com/repositories/${id}`;
 
   useEffect(() => {
-    const fetch = async () => {
-      const result = await axios({
-        method: "get",
-        url: repoId,
-      });
-      setRepo(result.data);
-    };
-
-    fetch();
-  });
+    if (id) repoItemStore.getRepo(id);
+  }, [repoItemStore]);
 
   return (
     <div>
-      {repo ? (
-        <RepoTile item={repo} onClick={() => {}} />
+      {repoItemStore.meta === Meta.success && repoItemStore.repo ? (
+        <RepoTile item={repoItemStore.repo} onClick={() => {}} />
       ) : (
         <div>
           <div>Такого репозитория нет :c</div>
@@ -40,4 +33,4 @@ const UserRepoPage = () => {
   );
 };
 
-export default UserRepoPage;
+export default observer(UserRepoPage);
