@@ -2,12 +2,12 @@ import React from "react";
 
 import Avatar from "@components/Avatar";
 import StarIcon from "@components/StarIcon";
-import { RepoItem } from "src/store/GitHubStore/types";
+import { RepoItemModel } from "@store/models/gitHub";
 
 import styles from "./RepoTile.module.scss";
 
 export type RepoTileProps = {
-  item: RepoItem;
+  item: RepoItemModel;
   onClick: (e: React.MouseEvent) => void;
 };
 
@@ -17,7 +17,7 @@ const RepoTile: React.FC<RepoTileProps> = ({ item, onClick }) => {
   return (
     <div className={styles.repotile}>
       <div className={styles.repotile__content} onClick={onClick}>
-        <Avatar src={item.owner.avatar_url} alt={item.name[0]} />
+        <Avatar src={item.owner.avatarUrl} alt={item.name[0]} />
         <div className={styles.repotile__info}>
           <div className={styles.repotile__heading}>{item.name}</div>
           <a
@@ -31,9 +31,9 @@ const RepoTile: React.FC<RepoTileProps> = ({ item, onClick }) => {
           <div className={styles.repotile__stats}>
             <div className={styles.repotile__stats__stars}>
               <StarIcon />
-              {item.stargazers_count}
+              {item.stargazersCount}
             </div>
-            <div>Updated {item.updated_at.substr(0, 10)}</div>
+            <div>Updated {item.updatedAt.substr(0, 10)}</div>
           </div>
         </div>
       </div>

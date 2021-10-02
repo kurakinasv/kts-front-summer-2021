@@ -3,7 +3,7 @@ import styles from "@styles/style.module.scss";
 export type InputProps = {
   value: string;
   placeholder: string;
-  onChange: (e: React.FormEvent<HTMLInputElement>) => void;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   className?: string;
   isDisabled?: boolean;
 };
