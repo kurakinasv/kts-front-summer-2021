@@ -9,9 +9,9 @@ import { Meta } from "@utils/meta";
 import { useLocalStore } from "@utils/useLocalStore";
 import { observer } from "mobx-react-lite";
 import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
-import ReposListPage from "src/ReposListPage";
-import ReposListStore from "src/ReposListPage/ReposListStore";
-import UserRepoPage from "src/UserRepoPage";
+import ReposListPage from "src/pages/ReposListPage";
+import UserRepoPage from "src/pages/UserRepoPage";
+import ReposListStore from "src/store/ReposListStore";
 
 const ReposSearchPage: React.FC = () => {
   const reposListStore = useLocalStore(() => new ReposListStore());

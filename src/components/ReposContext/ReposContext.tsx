@@ -1,12 +1,12 @@
 import { createContext, useContext } from "react";
 
-import ReposListStore from "src/ReposListPage/ReposListStore";
+import ReposListStore from "@store/ReposListStore";
 
-export type reposContextProps = React.PropsWithChildren<{
+export type ReposContextProps = React.PropsWithChildren<{
   reposListStore: ReposListStore | null;
 }>;
 
-const reposListContext = createContext<reposContextProps>({
+const reposListContext = createContext<ReposContextProps>({
   reposListStore: null,
 });
 
@@ -14,7 +14,7 @@ const Provider = reposListContext.Provider;
 
 export const useReposListContext = () => useContext(reposListContext);
 
-const ReposContext: React.FC<reposContextProps> = ({
+const ReposContext: React.FC<ReposContextProps> = ({
   reposListStore,
   children,
 }) => {

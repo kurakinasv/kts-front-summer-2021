@@ -6,7 +6,7 @@ import { useLocalStore } from "@utils/useLocalStore";
 import { observer } from "mobx-react-lite";
 import { Link, useParams } from "react-router-dom";
 
-import RepoItemStore from "./RepoItemStore";
+import RepoItemStore from "../../store/RepoItemStore";
 
 const UserRepoPage = () => {
   const repoItemStore = useLocalStore(() => new RepoItemStore());

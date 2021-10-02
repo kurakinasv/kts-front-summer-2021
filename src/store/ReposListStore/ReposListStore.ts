@@ -1,3 +1,7 @@
+import {
+  GetOrganizationReposListParams,
+  IGitHubStore,
+} from "@store/GitHubStore/types";
 import { Meta } from "@utils/meta";
 import { ILocalStore } from "@utils/useLocalStore";
 import {
@@ -8,10 +12,6 @@ import {
   runInAction,
 } from "mobx";
 import { HTTPMethod } from "src/shared/store/ApiStore/types";
-import {
-  GetOrganizationReposListParams,
-  IGitHubStore,
-} from "src/store/GitHubStore/types";
 import {
   normalizeRepoItem,
   RepoItemApi,

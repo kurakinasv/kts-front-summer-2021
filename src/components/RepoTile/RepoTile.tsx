@@ -2,7 +2,7 @@ import React from "react";
 
 import Avatar from "@components/Avatar";
 import StarIcon from "@components/StarIcon";
-import { RepoItemModel } from "src/store/models/gitHub";
+import { RepoItemModel } from "@store/models/gitHub";
 
 import styles from "./RepoTile.module.scss";
 

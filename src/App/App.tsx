@@ -1,4 +1,4 @@
-import ReposSearchPage from "src/ReposSearchPage";
+import ReposSearchPage from "src/pages/ReposSearchPage";
 
 const App = () => {
   return <ReposSearchPage />;
