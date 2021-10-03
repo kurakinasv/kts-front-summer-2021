@@ -1,7 +1,29 @@
 {
-  "extends": "./tsconfig.paths.json",
   "compilerOptions": {
-    "target": "es5",
+    "baseUrl": "./",
+    "paths": {
+      "components/*": [
+        "src/components/*"
+      ],
+      "utils/*": [
+        "src/utils/*"
+      ],
+      "store/*": [
+        "src/store/*"
+      ],
+      "shared/*": [
+        "src/shared/*"
+      ],
+      "models/*": [
+        "src/store/models/*"
+      ],
+      "styles/*": [
+        "src/styles/*"
+      ],
+      "pages/*": [
+        "src/pages/*"
+      ],
+    },
     "lib": [
       "dom",
       "dom.iterable",
@@ -20,9 +42,18 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    "baseUrl": "."
+    "strictNullChecks": true,
+    "target": "ES6",
+    "noImplicitAny": true,
+    "removeComments": true,
+    "preserveConstEnums": true,
+    "sourceMap": true
   },
   "include": [
-    "src"
+    "src/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "**/*.spec.ts"
   ]
 }

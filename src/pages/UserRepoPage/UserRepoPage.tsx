@@ -1,8 +1,9 @@
+import React from "react";
 import { useEffect } from "react";
 
-import RepoTile from "@components/RepoTile";
-import { Meta } from "@utils/meta";
-import { useLocalStore } from "@utils/useLocalStore";
+import RepoTile from "components/RepoTile";
+import { Meta } from "utils/meta";
+import { useLocalStore } from "utils/useLocalStore";
 import { observer } from "mobx-react-lite";
 import { Link, useParams } from "react-router-dom";
 

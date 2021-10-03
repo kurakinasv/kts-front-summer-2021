@@ -1,6 +1,8 @@
+import React from "react";
+
 import { createContext, useContext } from "react";
 
-import ReposListStore from "@store/ReposListStore";
+import ReposListStore from "store/ReposListStore";
 
 export type ReposContextProps = React.PropsWithChildren<{
   reposListStore: ReposListStore | null;

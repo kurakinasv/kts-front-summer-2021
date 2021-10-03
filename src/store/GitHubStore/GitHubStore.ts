@@ -1,6 +1,6 @@
-import { RepoItemApi } from "@models/gitHub";
-import ApiStore from "@shared/store/ApiStore";
-import { HTTPMethod } from "@shared/store/ApiStore/types";
+import { RepoItemApi } from "models/gitHub";
+import ApiStore from "shared/store/ApiStore";
+import { HTTPMethod } from "shared/store/ApiStore/types";
 
 import { GetOrganizationReposListParams, IGitHubStore } from "./types";
 

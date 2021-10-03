@@ -1,9 +1,9 @@
 import {
   GetOrganizationReposListParams,
   IGitHubStore,
-} from "@store/GitHubStore/types";
-import { Meta } from "@utils/meta";
-import { ILocalStore } from "@utils/useLocalStore";
+} from "store/GitHubStore/types";
+import { Meta } from "utils/meta";
+import { ILocalStore } from "utils/useLocalStore";
 import {
   action,
   computed,
@@ -11,18 +11,18 @@ import {
   observable,
   runInAction,
 } from "mobx";
-import { HTTPMethod } from "src/shared/store/ApiStore/types";
+import { HTTPMethod } from "shared/store/ApiStore/types";
 import {
   normalizeRepoItem,
   RepoItemApi,
   RepoItemModel,
-} from "src/store/models/gitHub";
+} from "store/models/gitHub";
 import {
   CollectionModel,
   getInitialCollectionModel,
   linearizeCollection,
   normalizeCollection,
-} from "src/store/models/shared/collection";
+} from "store/models/shared/collection";
 
 import ApiStore from "../../shared/store/ApiStore";
 

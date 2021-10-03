@@ -1,17 +1,17 @@
 import React from "react";
 
-import Button from "@components/Button";
-import Input from "@components/Input";
-import ReposContext from "@components/ReposContext/ReposContext";
-import SearchIcon from "@components/SearchIcon";
-import styles from "@styles/style.module.scss";
-import { Meta } from "@utils/meta";
-import { useLocalStore } from "@utils/useLocalStore";
+import Button from "components/Button";
+import Input from "components/Input";
+import ReposContext from "components/ReposContext/ReposContext";
+import SearchIcon from "components/SearchIcon";
+import styles from "styles/style.module.scss";
+import { Meta } from "utils/meta";
+import { useLocalStore } from "utils/useLocalStore";
 import { observer } from "mobx-react-lite";
 import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
-import ReposListPage from "src/pages/ReposListPage";
-import UserRepoPage from "src/pages/UserRepoPage";
-import ReposListStore from "src/store/ReposListStore";
+import ReposListPage from "pages/ReposListPage";
+import UserRepoPage from "pages/UserRepoPage";
+import ReposListStore from "store/ReposListStore";
 
 const ReposSearchPage: React.FC = () => {
   const reposListStore = useLocalStore(() => new ReposListStore());

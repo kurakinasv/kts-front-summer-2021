@@ -1,13 +1,13 @@
-import { Meta } from "@utils/meta";
-import { ILocalStore } from "@utils/useLocalStore";
+import { Meta } from "utils/meta";
+import { ILocalStore } from "utils/useLocalStore";
 import { computed, makeObservable, observable, runInAction } from "mobx";
-import ApiStore from "src/shared/store/ApiStore";
-import { HTTPMethod } from "src/shared/store/ApiStore/types";
+import ApiStore from "shared/store/ApiStore";
+import { HTTPMethod } from "shared/store/ApiStore/types";
 import {
   normalizeRepoItem,
   RepoItemApi,
   RepoItemModel,
-} from "src/store/models/gitHub";
+} from "store/models/gitHub";
 
 type PrivateFields = "_repo" | "_meta";
 
