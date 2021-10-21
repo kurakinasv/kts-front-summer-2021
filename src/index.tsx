@@ -2,12 +2,10 @@ import React from "react";
 
 import ReactDOM from "react-dom";
 
+import "regenerator-runtime";
 import "./index.css";
 import App from "./App/App";
-import reportWebVitals from "./reportWebVitals";
 import "./config/configureMobX";
-
-// import "./root/root";
 
 ReactDOM.render(
   <React.StrictMode>
@@ -16,4 +14,6 @@ ReactDOM.render(
   document.getElementById("root")
 );
 
-reportWebVitals();
+if (module.hot) {
+  module.hot.accept();
+}
