@@ -3,13 +3,13 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
-  "homepage": "https://kurakinasv.github.io/kts-front-summer-2021/",
+  "homepage": "https://kurakinasv.github.io/kts-front-summer-2021",
   "scripts": {
-    "dev": "npx webpack serve --mode development --history-api-fallback",
-    "build": "npx webpack --mode=production",
+    "dev": "SET NODE_ENV=development&& webpack serve --mode development --history-api-fallback",
+    "build": "SET NODE_ENV=production&& webpack --mode=production",
     "ts-check": "tsc --skipLibCheck --noEmit --project tsconfig.json",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d dist"
   },
   "devDependencies": {
     "@babel/cli": "^7.15.7",
