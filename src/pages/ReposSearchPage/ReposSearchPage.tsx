@@ -8,7 +8,7 @@ import styles from "styles/style.module.scss";
 import { Meta } from "utils/meta";
 import { useLocalStore } from "utils/useLocalStore";
 import { observer } from "mobx-react-lite";
-import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
+import { Redirect, Route, Switch } from "react-router-dom";
 import ReposListPage from "pages/ReposListPage";
 import UserRepoPage from "pages/UserRepoPage";
 import ReposListStore from "store/ReposListStore";
@@ -34,7 +34,7 @@ const ReposSearchPage: React.FC = () => {
   }, [reposListStore]);
 
   return (
-    <BrowserRouter>
+    <>
       <div className={styles.body}>
         <div className={styles.search}>
           {reposListStore.meta !== Meta.loading && (
@@ -75,7 +75,7 @@ const ReposSearchPage: React.FC = () => {
           </ReposContext>
         </Switch>
       </div>
-    </BrowserRouter>
+    </>
   );
 };
 
