@@ -1,9 +1,7 @@
 @import "../../variables.scss";
 
 .list {
-    // align-items: center;
     display: grid;
-    // grid-template-rows: repeat(12, 104px);
     grid-template-rows: auto;
     grid-row-gap: 16px;
 
@@ -12,20 +10,15 @@
 }
 
 .repotile {
-    // width: 100%;
     max-width: 357px;
     margin: 0 auto;
     display: flex;
-    // margin-bottom: 16px;
 
     border: $border;
     border-radius: $border-radius;
 
     &__avatar {
-        // position: absolute;
         @include square(80px, 50%);
-        // top: 10.5px;
-        // left: 10.5px;
 
         font-size: 40px;
         color: $white-color;
@@ -49,9 +42,6 @@
     }
 
     &__content {
-        // position: relative;
-        // padding: 21.5px 10.5px 20.5px 10.5px;
-
         display: flex;
         justify-content: flex-start;
         align-items: center;
@@ -67,10 +57,6 @@
         justify-content: space-between;
 
         overflow: hidden;
-
-        // width: 241px;
-        // height: 59px;
-        // margin-left: 92px;
     }
 
     &__heading {
@@ -99,8 +85,6 @@
 
     &__stats {
         display: flex;
-        // justify-content: space-between;
-        // padding-right: 65px;
 
         justify-content: flex-start;
         align-items: center;
@@ -108,7 +92,6 @@
         &__stars {
             display: inline-block;
             margin-right: 20px;
-            // width: 42px;
 
             & svg {
                 vertical-align: bottom;

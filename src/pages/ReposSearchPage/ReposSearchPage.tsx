@@ -36,7 +36,6 @@ const ReposSearchPage: React.FC = () => {
   }, [reposListStore]);
 
   return (
-    <>
       <div className={styles.wrapper}>
         <div className={styles.search}>
           {reposListStore.meta !== Meta.loading && (
@@ -77,7 +76,6 @@ const ReposSearchPage: React.FC = () => {
           </ReposContext>
         </Switch>
       </div>
-    </>
   );
 };
 
