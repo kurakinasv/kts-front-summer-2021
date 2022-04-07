@@ -19,9 +19,11 @@ const ReposSearchPage: React.FC = () => {
   const [value, onChange] = React.useState("");
 
   const handleSearch = () => {
+    if (!value) return
     reposListStore.getOrganizationReposList({
-      orgName: "ktsstudio",
+      orgName: value,
     });
+    onChange("")
   };
 
   const handleChange = React.useCallback(
@@ -30,12 +32,12 @@ const ReposSearchPage: React.FC = () => {
   );
 
   React.useEffect(() => {
-    reposListStore.getOrganizationReposList({ orgName: "ktsstudio" });
+    reposListStore.getOrganizationReposList({ orgName: value });
   }, [reposListStore]);
 
   return (
     <>
-      <div className={styles.body}>
+      <div className={styles.wrapper}>
         <div className={styles.search}>
           {reposListStore.meta !== Meta.loading && (
             <Input

@@ -14,7 +14,7 @@ const ReposListPage: React.FC<ReposListPageProps> = ({ list }) => {
   const context = useReposListContext();
 
   return (
-    <div>
+    <>
       <div className={styles.list}>
         {context.reposListStore?.list.map((repo) => (
           <div key={repo.id}>
@@ -24,7 +24,7 @@ const ReposListPage: React.FC<ReposListPageProps> = ({ list }) => {
           </div>
         ))}
       </div>
-    </div>
+    </>
   );
 };
 
